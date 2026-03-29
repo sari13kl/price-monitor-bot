@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
 import smtplib
 from email.mime.text import MIMEText
@@ -13,7 +14,12 @@ URL = "https://www.amazon.com.br/Taming-Ela-%C3%A9-sol-tempestade/dp/6583127059/
 ARQUIVO = 'preco.json'
 
 def pegar_preco():
-    navegador = webdriver.Chrome()
+    opcoes = Options()
+    opcoes.add_argument("--headless") #roda invisível
+    opcoes.add_argument("--no-sandbox")
+    opcoes.add_argument("--disable-dev-shm-usage")
+
+    navegador = webdriver.Chrome(options=opcoes)
     navegador.get(URL)
     
     time.sleep(6)
